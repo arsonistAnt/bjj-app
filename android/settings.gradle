@@ -1,0 +1,2 @@
+rootProject.name = "bjj-app"
+include ':app'
