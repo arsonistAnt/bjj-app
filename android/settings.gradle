@@ -1,2 +1,4 @@
 rootProject.name = "bjj-app"
 include ':app'
+include ':data'
+include ':domain'
