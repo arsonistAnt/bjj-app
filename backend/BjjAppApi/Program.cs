@@ -1,6 +1,10 @@
+using BjjAppApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<BjjAppDatabaseSettings>(
+    builder.Configuration.GetSection("BjjAppDatabase"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
