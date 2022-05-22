@@ -1,8 +1,8 @@
 import React from 'react'
-import Nav from './Nav'
+import Nav from './Nav/Nav'
 
 export default function Home() {
   return (
-    <Nav></Nav>
+    <Nav/>
   )
 }
