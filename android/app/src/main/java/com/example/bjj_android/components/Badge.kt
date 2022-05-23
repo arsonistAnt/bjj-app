@@ -62,5 +62,5 @@ fun Badge(
 @Preview
 @Composable
 private fun BadgePreview(){
-    Badge(text = "Testing", color = R.color.teal_200 )
+    Badge(text = "Testing", color = R.color.teal_200)
 }
