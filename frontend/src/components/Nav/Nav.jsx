@@ -1,13 +1,13 @@
 import React from 'react'
 import NavSearchBar from './NavSearchBar'
 
-export default function Nav() {
+export default function Nav({title}) {
   return (
-    <nav className='w-full flex justify-center  py-8 bg-cyan-50'>
-      <div className='w-7/12 flex justify-center bg-teal-200'>
-        <div className='flex justify-center items-center mr-auto px-12 bg-yellow-300 '>
-          <img src="" alt="Logo" srcset="" />
-          <div>Title</div>
+    <nav className='w-full flex justify-center py-8'>
+      <div className='w-7/12 flex justify-center'>
+        <div className='flex justify-center items-center mr-auto px-12'>
+          <img src="" alt="" srcset="" />
+          <div>{title}</div>
         </div>
         <NavSearchBar/>
       </div>
