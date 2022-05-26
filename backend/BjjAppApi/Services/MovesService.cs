@@ -1,5 +1,4 @@
 using BjjAppApi.Models;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace BjjAppApi.Services;
