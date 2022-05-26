@@ -8,17 +8,9 @@ public class MovesService
 {
     private readonly IMongoCollection<Move> _movesCollection;
 
-    public MovesService(
-        IOptions<BjjAppDatabaseSettings> bjjAppDatabaseSettings)
+    public MovesService(IMongoCollection<Move> movesCollection)
     {
-        var mongoClient = new MongoClient(
-            bjjAppDatabaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            bjjAppDatabaseSettings.Value.DatabaseName);
-
-        _movesCollection = mongoDatabase.GetCollection<Move>(
-            bjjAppDatabaseSettings.Value.MovesCollectionName);
+        _movesCollection = movesCollection;
     }
 
     public async Task<List<Move>> GetAsync() =>

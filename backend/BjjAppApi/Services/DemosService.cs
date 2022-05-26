@@ -8,17 +8,9 @@ public class DemosService
 {
     private readonly IMongoCollection<Demo> _demosCollection;
 
-    public DemosService(
-        IOptions<BjjAppDatabaseSettings> bjjAppDatabaseSettings)
+    public DemosService(IMongoCollection<Demo> demosCollection)
     {
-        var mongoClient = new MongoClient(
-            bjjAppDatabaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            bjjAppDatabaseSettings.Value.DatabaseName);
-
-        _demosCollection = mongoDatabase.GetCollection<Demo>(
-            bjjAppDatabaseSettings.Value.DemosCollectionName);
+        _demosCollection = demosCollection;
     }
 
     public async Task<List<Demo>> GetAsync() =>
