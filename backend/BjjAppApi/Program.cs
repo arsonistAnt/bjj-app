@@ -1,3 +1,4 @@
+using BjjAppApi.Interfaces;
 using BjjAppApi.Models;
 using BjjAppApi.Services;
 using MongoDB.Driver;
@@ -11,9 +12,9 @@ var mongoDatabase = mongoClient.GetDatabase(bjjAppDatabaseSettings.DatabaseName)
 builder.Services.AddSingleton(mongoDatabase.GetCollection<Move>(bjjAppDatabaseSettings.MovesCollectionName));
 builder.Services.AddSingleton(mongoDatabase.GetCollection<Demo>(bjjAppDatabaseSettings.DemosCollectionName));
 builder.Services.AddSingleton(mongoDatabase.GetCollection<Name>(bjjAppDatabaseSettings.NamesCollectionName));
-builder.Services.AddSingleton<MovesService>();
-builder.Services.AddSingleton<DemosService>();
-builder.Services.AddSingleton<NamesService>();
+builder.Services.AddSingleton<IMovesRepository, MovesMongoRepository>();
+builder.Services.AddSingleton<IDemosRepository, DemosMongoRepository>();
+builder.Services.AddSingleton<INamesRepository, NamesMongoRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

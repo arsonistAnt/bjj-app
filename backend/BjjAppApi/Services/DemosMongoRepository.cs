@@ -1,13 +1,14 @@
+using BjjAppApi.Interfaces;
 using BjjAppApi.Models;
 using MongoDB.Driver;
 
 namespace BjjAppApi.Services;
 
-public class DemosService
+public class DemosMongoRepository : IDemosRepository
 {
     private readonly IMongoCollection<Demo> _demosCollection;
 
-    public DemosService(IMongoCollection<Demo> demosCollection)
+    public DemosMongoRepository(IMongoCollection<Demo> demosCollection)
     {
         _demosCollection = demosCollection;
     }

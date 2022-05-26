@@ -1,13 +1,14 @@
+using BjjAppApi.Interfaces;
 using BjjAppApi.Models;
 using MongoDB.Driver;
 
 namespace BjjAppApi.Services;
 
-public class NamesService
+public class NamesMongoRepository : INamesRepository
 {
     private readonly IMongoCollection<Name> _namesCollection;
 
-    public NamesService(IMongoCollection<Name> namesCollection)
+    public NamesMongoRepository(IMongoCollection<Name> namesCollection)
     {
         _namesCollection = namesCollection;
     }
