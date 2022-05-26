@@ -1,5 +1,4 @@
 using BjjAppApi.Models;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace BjjAppApi.Services;
@@ -8,17 +7,9 @@ public class NamesService
 {
     private readonly IMongoCollection<Name> _namesCollection;
 
-    public NamesService(
-        IOptions<BjjAppDatabaseSettings> bjjAppDatabaseSettings)
+    public NamesService(IMongoCollection<Name> namesCollection)
     {
-        var mongoClient = new MongoClient(
-            bjjAppDatabaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            bjjAppDatabaseSettings.Value.DatabaseName);
-
-        _namesCollection = mongoDatabase.GetCollection<Name>(
-            bjjAppDatabaseSettings.Value.NamesCollectionName);
+        _namesCollection = namesCollection;
     }
 
     public async Task<List<Name>> GetAsync() =>
