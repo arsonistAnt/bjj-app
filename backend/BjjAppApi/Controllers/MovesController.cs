@@ -1,5 +1,5 @@
 using BjjAppApi.Models;
-using BjjAppApi.Services;
+using BjjAppApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BjjAppApi.Controllers;
@@ -8,19 +8,19 @@ namespace BjjAppApi.Controllers;
 [Route("api/[controller]")]
 public class MovesController : ControllerBase
 {
-    private readonly MovesService _movesService;
+    private readonly IMovesRepository _movesRepository;
 
-    public MovesController(MovesService movesService) =>
-        _movesService = movesService;
+    public MovesController(IMovesRepository movesRepository) =>
+        _movesRepository = movesRepository;
 
     [HttpGet]
     public async Task<List<Move>> Get() =>
-        await _movesService.GetAsync();
+        await _movesRepository.GetAsync();
 
     [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<Move>> Get(string id)
     {
-        var move = await _movesService.GetAsync(id);
+        var move = await _movesRepository.GetAsync(id);
 
         if (move is null)
         {
@@ -33,7 +33,7 @@ public class MovesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post(Move newMove)
     {
-        await _movesService.CreateAsync(newMove);
+        await _movesRepository.CreateAsync(newMove);
 
         return CreatedAtAction(nameof(Get), new { id = newMove.Id }, newMove);
     }
@@ -41,7 +41,7 @@ public class MovesController : ControllerBase
     [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, Move updatedMove)
     {
-        var move = await _movesService.GetAsync(id);
+        var move = await _movesRepository.GetAsync(id);
 
         if (move is null)
         {
@@ -50,7 +50,7 @@ public class MovesController : ControllerBase
 
         updatedMove.Id = move.Id;
 
-        await _movesService.UpdateAsync(id, updatedMove);
+        await _movesRepository.UpdateAsync(id, updatedMove);
 
         return NoContent();
     }
@@ -58,14 +58,14 @@ public class MovesController : ControllerBase
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
-        var move = await _movesService.GetAsync(id);
+        var move = await _movesRepository.GetAsync(id);
 
         if (move is null)
         {
             return NotFound();
         }
 
-        await _movesService.RemoveAsync(id);
+        await _movesRepository.RemoveAsync(id);
 
         return NoContent();
     }

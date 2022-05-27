@@ -1,24 +1,16 @@
+using BjjAppApi.Interfaces;
 using BjjAppApi.Models;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace BjjAppApi.Services;
+namespace BjjAppApi.Repositories;
 
-public class NamesService
+public class NamesMongoRepository : INamesRepository
 {
     private readonly IMongoCollection<Name> _namesCollection;
 
-    public NamesService(
-        IOptions<BjjAppDatabaseSettings> bjjAppDatabaseSettings)
+    public NamesMongoRepository(IMongoCollection<Name> namesCollection)
     {
-        var mongoClient = new MongoClient(
-            bjjAppDatabaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            bjjAppDatabaseSettings.Value.DatabaseName);
-
-        _namesCollection = mongoDatabase.GetCollection<Name>(
-            bjjAppDatabaseSettings.Value.NamesCollectionName);
+        _namesCollection = namesCollection;
     }
 
     public async Task<List<Name>> GetAsync() =>
