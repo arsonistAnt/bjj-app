@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using BjjAppApi.Models;
 using BjjAppApi.Services;
 using MongoDB.Driver;
