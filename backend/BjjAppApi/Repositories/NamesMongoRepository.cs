@@ -2,7 +2,7 @@ using BjjAppApi.Interfaces;
 using BjjAppApi.Models;
 using MongoDB.Driver;
 
-namespace BjjAppApi.Services;
+namespace BjjAppApi.Repositories;
 
 public class NamesMongoRepository : INamesRepository
 {

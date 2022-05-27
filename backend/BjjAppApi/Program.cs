@@ -1,6 +1,6 @@
 using BjjAppApi.Interfaces;
 using BjjAppApi.Models;
-using BjjAppApi.Services;
+using BjjAppApi.Repositories;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
